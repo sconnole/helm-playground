@@ -3,6 +3,16 @@ entries:
   playground:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-03-14T19:00:28.204850868Z"
+    description: A Helm chart for Kubernetes
+    digest: 6513ac155137be09fcfaecb6fc769ca1a241a6666ac56f4fcce4ac31ddda59c2
+    name: playground
+    type: application
+    urls:
+    - https://github.com/sconnole/helm-playground/releases/download/playground-0.1.1/playground-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-03-14T18:54:54.243185696Z"
     description: A Helm chart for Kubernetes
     digest: 3f33bf4e3a8d3d0f9e37815e8144a9cf2f0c750f50cd78927789223469c959ea
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://github.com/sconnole/helm-playground/releases/download/playground-0.1.0/playground-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-14T18:54:54.243189896Z"
+generated: "2023-03-14T19:00:28.204858168Z"

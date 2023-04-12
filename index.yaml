@@ -34,6 +34,16 @@ entries:
   test:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-04-12T21:11:48.345554772Z"
+    description: A Helm chart for Kubernetes
+    digest: 23af631776903fbd894590cf2f7f127dbae2d179356b84e8180e9383283b038d
+    name: test
+    type: application
+    urls:
+    - https://github.com/sconnole/helm-playground/releases/download/test-1.0.0/test-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-03-15T23:03:19.630663402Z"
     description: A Helm chart for Kubernetes
     digest: 5139b3a7cb41f701665caa6f09c8d92880c85856720764aad3a61d3ace8a8263
@@ -52,4 +62,4 @@ entries:
     urls:
     - https://github.com/sconnole/helm-playground/releases/download/test-0.1.0-alpha-timestamp/test-0.1.0-alpha-timestamp.tgz
     version: 0.1.0-alpha-timestamp
-generated: "2023-03-15T23:11:57.88863076Z"
+generated: "2023-04-12T21:11:48.345572473Z"

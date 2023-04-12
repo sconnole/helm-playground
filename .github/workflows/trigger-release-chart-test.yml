@@ -63,8 +63,7 @@ jobs:
           git commit -m "ci: updated ${{ inputs.path }} image tag to ${{ inputs.imageTag }}." -m "ci: bump chart to ${{ steps.bump.outputs.newVers }}"
           git push
 
-  
   call-helm-chart-release:
     needs: increment-image
-    uses: ./.github/workflows/release-charts.yml
+    uses: ./.github/workflows/release-chart-test.yml
 

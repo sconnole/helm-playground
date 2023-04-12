@@ -1,0 +1,75 @@
+name: Release Helm Charts
+
+# Do not change this
+concurrency: release-helm
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - charts/**
+
+jobs:
+  getChangedFiles:
+    runs-on: ubuntu-latest
+    outputs:
+      changed-files: ${{ steps.changed-files.outputs.all_changed_files }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+        with:
+          files: charts/*
+          dir_names: true
+          dir_names_max_depth: 2
+
+  release:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    needs: getChangedFiles
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: 'main'
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: 'gh-pages'
+          ref: 'gh-pages'
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+
+      - name: Package Helm Charts
+        shell: bash
+        working-directory: main/charts/
+        run: |
+          echo "${{ needs.getChangedFiles.outputs.changed-files }}"
+          for chartName in ${{ needs.getChangedFiles.outputs.changed-files }}; do
+              chartDir=${chartName##*/}
+              echo "Packaging ${chartDir}"
+              mkdir -p ../../gh-pages/${chartDir}
+              helm package ${chartDir} -u -d ../../gh-pages/${chartDir}
+          done
+      - name: Push New Files
+        shell: bash
+        working-directory: gh-pages
+        run: |
+          helm repo index .
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add .
+          git commit -m "ci: Update charts. ref:$GITHUB_SHA"
+          git push
+

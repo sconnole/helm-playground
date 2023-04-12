@@ -1,0 +1,70 @@
+name: ImageIncrement
+
+on:
+  workflow_dispatch:
+    inputs:
+      imageTag:
+        description: 'Image Tag'
+        required: true
+      imageTagYamlPrefix:
+        description: 'Optional path to tag property in values.yaml'
+        required: false
+        default: ''
+      path:
+        description: 'Chart Path'
+        required: true
+jobs:
+  increment-image:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up yq
+        uses: frenck/action-setup-yq@v1
+
+      - name: Path check
+        id: Path
+        run: |
+          echo "PATH=charts/${{ inputs.path }}" >> $GITHUB_OUTPUT
+          [ -d "charts/${{ inputs.path }}" ] \
+          && echo "Directory charts/${{ inputs.path }} exists." \
+          || echo "Directory charts/${{ inputs.path }} does not exist."
+
+      - name: Set image tag
+        run: |
+          echo "Chart path: ${{ steps.Path.outputs.PATH }}"
+          if [[ "${{inputs.imageTagYamlPrefix}}" == "" ]]
+          then
+          oldtag=$(yq '.. | select(has("image")) | .image.tag' ${{ steps.Path.outputs.PATH }}/values.yaml)
+          yq e -i '(.. | select(has("image") and .image.tag != null).image.tag) |= "${{ inputs.imageTag }}"' ${{ steps.Path.outputs.PATH }}/values.yaml
+          else
+          oldtag=$(yq '${{ inputs.imageTagYamlPrefix }}.image.tag' ${{ steps.Path.outputs.PATH }}/values.yaml)
+          yq e -i '${{ inputs.imageTagYamlPrefix }}.image.tag = "${{ inputs.imageTag }}"' ${{ steps.Path.outputs.PATH }}/values.yaml
+          fi
+          echo "Old tag: $oldtag"
+          echo "New tag: ${{ inputs.imageTag }}"
+
+      - name: Bump charts
+        id: bump
+        run: |
+          current_version=$(yq eval '.version' ${{ steps.Path.outputs.PATH }}/Chart.yaml)
+          new_version=$(echo "${current_version}" |  awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
+          yq e -i '.version = "'${new_version}'"' ${{ steps.Path.outputs.PATH }}/Chart.yaml
+          echo "newVers=${new_version}" >> $GITHUB_OUTPUT
+          echo "Version bumped to ${new_version}"
+
+      - name: Git commit / push
+        working-directory: .
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "ci: updated ${{ inputs.path }} image tag to ${{ inputs.imageTag }}." -m "ci: bump chart to ${{ steps.bump.outputs.newVers }}"
+          git push
+
+  
+  call-helm-chart-release:
+    needs: increment-image
+    uses: ./.github/workflows/release-charts.yml
+

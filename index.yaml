@@ -3,7 +3,17 @@ entries:
   playground:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-04-14T15:45:42.976116399Z"
+    created: "2023-04-14T15:48:10.433105431Z"
+    description: A Helm chart for Kubernetes
+    digest: f191bc731cb81dbf8266d70d1e52007691c9ddf70f22e3733375be06dee61dc2
+    name: playground
+    type: application
+    urls:
+    - playground/playground-0.1.18.tgz
+    version: 0.1.18
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-04-14T15:48:10.432645526Z"
     description: A Helm chart for Kubernetes
     digest: 328555ea66bde289b50d70b29e2419a86af1f931b4e0a180af9d374d9b4529d4
     name: playground
@@ -13,7 +23,7 @@ entries:
     version: 0.1.16
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-04-14T15:45:42.973137107Z"
+    created: "2023-04-14T15:48:10.431559814Z"
     description: A Helm chart for Kubernetes
     digest: 8a3490a3aa78a9ef899ffc7cc573282e4c6262433d88deaae0628de105755ff1
     name: playground
@@ -23,7 +33,7 @@ entries:
     version: 0.1.14
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-04-14T15:45:42.972548588Z"
+    created: "2023-04-14T15:48:10.430911906Z"
     description: A Helm chart for Kubernetes
     digest: f06a4e4ddc0310f9e6db740c7105399bfbd1301d5c70cf34f4fd29dee5cd9a56
     name: playground
@@ -33,7 +43,7 @@ entries:
     version: 0.1.13
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-04-14T15:45:42.972021472Z"
+    created: "2023-04-14T15:48:10.430032796Z"
     description: A Helm chart for Kubernetes
     digest: f91f584ce12cff4c27fa07e7abb61abd547e989bbe36226d07f00295c8685179
     name: playground
@@ -43,7 +53,7 @@ entries:
     version: 0.1.12
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-04-14T15:45:42.971440754Z"
+    created: "2023-04-14T15:48:10.429574491Z"
     description: A Helm chart for Kubernetes
     digest: ab753ef242eac7b9f02acbb047259e0c53190488cf00c2b2be667a90bfa256b4
     name: playground
@@ -53,7 +63,7 @@ entries:
     version: 0.1.11
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-04-14T15:45:42.979304698Z"
+    created: "2023-04-14T15:48:10.434742949Z"
     description: A Helm chart for Kubernetes
     digest: 888a9a07e001187fda9fca08f904f8c28e22e0f2cde69f189e82806c065fe089
     name: playground
@@ -63,7 +73,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-04-14T15:45:42.978439371Z"
+    created: "2023-04-14T15:48:10.434338045Z"
     description: A Helm chart for Kubernetes
     digest: de917a9686a5e3787ef1a570af68435113a0b541077ec6c4e64dac21ad17ab7e
     name: playground
@@ -73,7 +83,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-04-14T15:45:42.977723649Z"
+    created: "2023-04-14T15:48:10.43393324Z"
     description: A Helm chart for Kubernetes
     digest: eba919e1db91fdbef9ab4ebbd1760531228bb8365511022440d003f9aaad77ea
     name: playground
@@ -83,7 +93,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-04-14T15:45:42.976993326Z"
+    created: "2023-04-14T15:48:10.433523636Z"
     description: A Helm chart for Kubernetes
     digest: 2590fc94321ee06445bf223458e862c79d6aa28b6524990086f325c864789428
     name: playground
@@ -91,4 +101,4 @@ entries:
     urls:
     - playground/playground-0.1.3.tgz
     version: 0.1.3
-generated: "2023-04-14T15:45:42.97067423Z"
+generated: "2023-04-14T15:48:10.428943884Z"

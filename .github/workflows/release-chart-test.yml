@@ -23,11 +23,6 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Pull latest
-        run: |
-          git pull origin main
-          git rev-parse HEAD
-
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v35
@@ -51,7 +46,6 @@ jobs:
         working-directory: ./main
         run: |
           git pull origin main
-          git rev-parse HEAD
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -73,6 +67,7 @@ jobs:
               mkdir -p ../../gh-pages/${chartDir}
               helm package ${chartDir} -u -d ../../gh-pages/${chartDir}
           done
+
       - name: Push New Files
         shell: bash
         working-directory: gh-pages

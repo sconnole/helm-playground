@@ -63,11 +63,6 @@ jobs:
           git commit -m "ci: updated ${{ inputs.path }} image tag to ${{ inputs.imageTag }}." -m "ci: bump chart to ${{ steps.bump.outputs.newVers }}"
           git push
 
-      - name: Wait 10 seconds
-        uses: whatnick/wait-action@v0.1.2
-        with:
-          time: '10s'
-
   call-helm-chart-release:
     needs: increment-image
     uses: ./.github/workflows/release-chart-test.yml

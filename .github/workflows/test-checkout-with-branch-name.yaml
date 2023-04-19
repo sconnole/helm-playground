@@ -9,53 +9,9 @@ jobs:
         id: branch-name
         uses: tj-actions/branch-names@v6
       
-      - name: Current branch name
-        run: |
-          echo "${{ steps.branch-name.outputs.current_branch }}"
-        # Outputs: "feature/test" current PR branch.
-
-      - name: Running on a non tag based branch and a PR branch.
-        if: steps.branch-name.outputs.is_default == 'false'
-        run: |
-          echo "Running on branch: ${{ steps.branch-name.outputs.current_branch }}"
-        # Outputs: "Running on branch: feature/test".
-      
-      - name: Running on a pull request (i.e non tag based branch).
-        if: steps.branch-name.outputs.is_tag == 'false' && steps.branch-name.outputs.is_default == 'false'
-        run: |
-          echo "Running on branch: ${{ steps.branch-name.outputs.current_branch }}"
-        # Outputs: "Running on branch: feature/test".
-      
-      - name: Get Ref branch name
-        run: |
-          echo "${{ steps.branch-name.outputs.ref_branch }}"
-        #  Outputs: "1/merge"
-
-      - name: Get Head Ref branch name (i.e The current pull request branch)
-        run: |
-          echo "${{ steps.branch-name.outputs.head_ref_branch }}"
-        # Outputs: "feature/test" current PR branch.
-
-      - name: Get Base Ref branch name (i.e The target of a pull request.)
-        run: |
-          echo "${{ steps.branch-name.outputs.base_ref_branch }}"
-        # Outputs: "main".
-      
-      - name: Default branch name
-        run: |
-          echo "${{ steps.branch-name.outputs.default_branch }}"
-        # Outputs: "main" the default branch.
-
-      - name: Extract branch name
-        shell: bash
-        run: |
-          echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_OUTPUT
-          echo ${GITHUB_REF#refs/heads/}
-        id: extract_branch
-
       - uses: actions/checkout@v3
         with: 
-          ref: ${{ steps.extract_branch.outputs.branch }}
+          ref: "${{ steps.branch-name.outputs.current_branch }}"
 
       - name: Commit / Push 
         run: |

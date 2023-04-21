@@ -9,5 +9,5 @@ jobs:
   trigger-test:
     runs-on: ubuntu-latest
     steps: 
-      - run: | 
-        echo 'Tags were triggered'
+      - run: |
+          echo 'Tags were triggered'
